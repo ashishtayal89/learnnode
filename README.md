@@ -5,7 +5,7 @@
 1. [Introduction](#introduction)
 
 
-# NODE GETTING STARTED
+# Node getting started
 
 
 <a href="#top" style="position:fixed; right:15%; top:5%">  Top </a>
@@ -15,5 +15,5 @@
 ## Introduction 
 
 
-# NODE ADVANCED
+# Node advanced
 
