@@ -1,17 +1,4 @@
-<head>
-<style> 
-.top{
-position:fixed; 
-right:15%; 
-top:5%
-}
-.bottom{
-position:fixed; 
-right:5%; 
-top:5%
-}
-</style>
-<head>
+
 
 
 <span id="top"></span>
@@ -24,11 +11,10 @@ top:5%
 # Node getting started
 
 
-<a href="#top" class="top">  Top </a>
-<a href="#bottom" class="bottom">  Bottom </a>
+## Introduction 
 <span id="introduction"></span>
 
-## Introduction 
+
 
 
 # Node advanced
