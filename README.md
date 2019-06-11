@@ -1,5 +1,5 @@
 <head>
-<style rel="stylesheet" type="text/css"> 
+<style> 
 .top{
 position:fixed; 
 right:15%; 
