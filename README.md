@@ -1,3 +1,19 @@
+<head>
+<style rel="stylesheet" type="text/css"> 
+.top{
+position:fixed; 
+right:15%; 
+top:5%
+}
+.bottom{
+position:fixed; 
+right:5%; 
+top:5%
+}
+</style>
+</head>
+
+
 <span id="top"></span>
 
 # Index
@@ -8,8 +24,8 @@
 # Node getting started
 
 
-<a href="#top" style="position:fixed; right:15%; top:5%">  Top </a>
-<a href="#bottom" style="position:fixed; right:5%; top:5%">  Bottom </a>
+<a href="#top" class="top">  Top </a>
+<a href="#bottom" class="bottom">  Bottom </a>
 <span id="introduction"></span>
 
 ## Introduction 
