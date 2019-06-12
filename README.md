@@ -9,6 +9,7 @@
     - [What is node?](#whatisnode)
     - [Why node?](#whynode)
     - [Anology](#anology)
+    - [Instalation](#installation)
 
 
 # Getting started
@@ -76,10 +77,20 @@ Node is wrapper around a javascript runtime like V8. It can be considered as an 
     ```
 
 ### Installation
+<span id="installation"></span>
 
 1. Window go to official site of node and download the instalation software. I would recommend installing node in a Ubuntu subsystem on windows.
 
 2. For mac you can use Homebrew to install node like `brew install node`.
+
+## Node Basics
+
+### REPL
+
+- REPL stands for Read, Eval, Print and Loop.
+- This instructs node to read a line, evaluate it, print the result and loop until the user exits the repl.
+
+`Note : Difference b/w a statement and an expression is that a statement would never return anything back or would always return undefined. While the expression returns a value which generally is other than undefined.`
 
 
 
