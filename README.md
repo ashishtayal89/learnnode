@@ -37,5 +37,52 @@ Node is wrapper around a javascript runtime like V8. It can be considered as an 
 ### Anologies
 <span id="anology"></span>
 
+1. **Node** : We can compare writing a program in node to perparing a recipie in the kitchen.
+
+    For example let us assume we are preparing "BUTTER CHICKEN". PFB the comparison :
+    - Butter chicken    -->     Program/Application
+        - Your program is the final product that you make.
+    - Ingredients       -->     Packages
+        - It is very important to choose the ingredients wisely to make a good product. Simillary it is important to choose the right packages to produce a good application.
+    - Computer          -->     Cook
+        - The computer acts as a cook and compiles all the ingredients/pacakges to create the product/app.
+    - Kitchen           -->     Node
+        - The Node acts as a kitchen which provides the environment and modules to create the application.
+
+2. **Callback** : `A callback is a function which the node will "call back" at a later point of time in a program`.
+
+    We can consider a callback as calling the name of the person after order is prepared. Let us have 2 entities vendor and customer. Customer places the order and asks the vendor to call his name by passing a "callName" function.
+
+    ```javascript
+    function callName(){
+        pickOrder();
+    }
+    vendor.takeOrder(callName,name){
+        setInterval(()=>{
+            if(orderReady){
+                callName(name);
+            }
+        },1000);
+    }
+    ```
+
+
+
+    We can consider a promise as a buzz which is given to us when we order something in pizzahut. It starts buzzing as soon as our order is ready, and we can perform the desired action based on that.
+
+    ```javascript
+    let buzz = vendor.takeOrder()
+    buzz.then(pickOrder);
+    ```
+
+### Installation
+
+1. Window go to official site of node and download the instalation software. I would recommend installing node in a Ubuntu subsystem on windows.
+
+2. For mac you can use Homebrew to install node like `brew install node`.
+
+
+
+
 # Advanced
 
