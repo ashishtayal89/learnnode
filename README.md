@@ -10,6 +10,8 @@
     - [Why node?](#whynode)
     - [Anology](#anology)
     - [Instalation](#installation)
+2. [Basics](#basics)
+    - [REPL](#repl)
 
 
 # Getting started
@@ -82,17 +84,16 @@ Node is wrapper around a javascript runtime like V8. It can be considered as an 
 
 2. For mac you can use Homebrew to install node like `brew install node`.
 
-## Node Basics
+<span id="basics"></span>
+## Basics
 
+<span id="repl"></span>
 ### REPL
 
 - REPL stands for Read, Eval, Print and Loop.
 - This instructs node to read a line, evaluate it, print the result and loop until the user exits the repl.
 
 `Note : Difference b/w a statement and an expression is that a statement would never return anything back or would always return undefined. While the expression returns a value which generally is other than undefined.`
-
-
-
 
 # Advanced
 
