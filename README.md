@@ -65,9 +65,9 @@ Node is wrapper around a javascript runtime like V8. It can be considered as an 
 
 2.  **Callback** : `A callback is a function which the node will "call back" at a later point of time in a program`.
 
-        We can consider a callback as calling the name of the person after order is prepared. Let us have 2 entities vendor and customer. Customer places the order and asks the vendor to call his name by passing a "callName" function.
+We can consider a callback as calling the name of the person after order is prepared. Let us have 2 entities vendor and customer. Customer places the order and asks the vendor to call his name by passing a "callName" function.
 
-        ```javascript
+```javascript
         function callName(){
             pickOrder();
         }
@@ -78,14 +78,14 @@ Node is wrapper around a javascript runtime like V8. It can be considered as an 
                 }
             },1000);
         }
-        ```
+```
 
-        We can consider a promise as a buzz which is given to us when we order something in pizzahut. It starts buzzing as soon as our order is ready, and we can perform the desired action based on that.
+We can consider a promise as a buzz which is given to us when we order something in pizzahut. It starts buzzing as soon as our order is ready, and we can perform the desired action based on that.
 
-        ```javascript
-        let buzz = vendor.takeOrder()
-        buzz.then(pickOrder);
-        ```
+```javascript
+let buzz = vendor.takeOrder();
+buzz.then(pickOrder);
+```
 
     <span id="installation"></span>
 
