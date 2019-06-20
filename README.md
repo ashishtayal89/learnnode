@@ -87,7 +87,7 @@ let buzz = vendor.takeOrder();
 buzz.then(pickOrder);
 ```
 
-    <span id="installation"></span>
+<span id="installation"></span>
 
 ### Installation
 
