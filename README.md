@@ -243,4 +243,15 @@ NPM stands for node package manager which help's in maintaining node packages. T
 
 ### Create and publish npm package
 
+Steps to create and publish a package :
+
+1. Create a folder for your package and name it based on the name which you want to give to your package. Let take it **test_package** for now.
+2. Inside this create an index.js file and export the functionality which you want to provide.
+3. Now run the `npm init` command to create the package.json file. Your package is ready now.
+4. Now you need to publish it to [npmjs.com](https://npmjs.com). For this you need to have an account with npmjs.com. Please go and create one if not already present.
+5. Once you have an account, login to the account using the command `npm login`.
+6. After you have logged in you can go ahead and publish the package using the command `npm publish`. This will publish your package to the npm directory.
+7. Thats it! your first npm package is live and ready for use. Now you can run the command `npm i [your package name]` to install the package.
+8. Import the package using `require("package name")` and use it.
+
 # Advanced
