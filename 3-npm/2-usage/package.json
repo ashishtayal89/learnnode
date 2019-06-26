@@ -1,4 +1,8 @@
 {
   "name": "using-lodash",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "devDependencies": {},
+  "dependencies": {
+    "node": "^6.17.1"
+  }
 }

@@ -18,6 +18,9 @@
    - [Intro to NPM](#npmintro)
    - [Semantic Versioning](#semver)
    - [Create NPM package](#npmpackage)
+   - [NPX](#npx)
+   - [NPM Update](#npmupdate)
+   - [Module Intro](#moduleintro)
 
 # Getting started
 
@@ -253,5 +256,58 @@ Steps to create and publish a package :
 6. After you have logged in you can go ahead and publish the package using the command `npm publish`. This will publish your package to the npm directory.
 7. Thats it! your first npm package is live and ready for use. Now you can run the command `npm i [your package name]` to install the package.
 8. Import the package using `require("package name")` and use it.
+
+<span id="npx"></span>
+
+### NPX and NPM scripts
+
+**NPM Scripts**
+
+1. NPM scripts are used to execute the node cli packages. Lets take an example of **jest**.
+2. We add the node scripts in the scripts section of package.json. Eg
+   ```javascript
+   scripts: {
+     test: jest;
+   }
+   ```
+3. Install the jest localy using `npm i jest`.
+4. Now you can run the jest using `npm run test`. This will look for the jest package in the node modules and run it. You can also run it by using `npm test`. `test` is one of the special scripts of npm which doesn't need the `run` keyword. There are some more special npm commands like `start` etc.
+
+**NPX**
+
+If you just run `jest` in the command line it would not run. This is because it would look for global instalation of jest and not the local installation. If you want to run jest from local installation the run it useing `npx`. NPX stands form Node package exection. **NPX makes it easy to use CLI tools and other executables hosted on the registry**. This means that any cli in the npm registry in run using npx command.Calling `npx <command>` when `<command>` isn’t already in your \$PATH will automatically install a package with that name from the npm registry for you, and invoke it.
+
+`Note : npx looks into the local /node_modules folder for the package and if it can’t find it, it will download and run it without having that package globally installed. Make sure you --save or --save-dev the package first. This keeps dependent packages listed in package.json, so that npx can use the local version instead of downloading it to the npm cache.`
+
+```javascript
+# Before
+$ node ./node_modules/.bin/mocha
+
+# Now with npx:
+$ npx mocha
+```
+
+- We can configure eslint using the command `npx eslint --init` or `eslint --init` if eslint is installed globaly.
+- You can have a look at all the npm scripts by using `npm help npm-scripts`.
+
+<span id="npmupdate"></span>
+
+### NPM Update
+
+- `npm update` command is used to update the npm packages based on the semantic versioning done in the package.json.
+- `npm ls` displays the complete package dependency tree.
+- `npm show [package] version` is used to see all the versions of a npm package.
+- `npm outdated` is a command which tells you which packages will be updated and to which version.
+- `npm i [package]@[version]` command is used to intall a specific version of npm package or `npm i [package]@latest` is used to install the latest version of npm package.
+
+<span id="module"></span>
+
+## Module and Concurrency
+
+<span id="moduleintro"></span>
+
+### Module Intro
+
+- Module is nothing but a file that contains code.
 
 # Advanced
