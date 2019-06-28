@@ -20,6 +20,7 @@
    - [Create NPM package](#npmpackage)
    - [NPX](#npx)
    - [NPM Update](#npmupdate)
+4. [Module](#moduleintro)
    - [Module Intro](#moduleintro)
 
 # Getting started
@@ -309,5 +310,93 @@ $ npx mocha
 ### Module Intro
 
 - Module is nothing but a file that contains code.
+- Node internaly wraps the file code in a function. It passes some arguments to these functions. These are not global arguments but only specific to these functions. PFB an example:
+
+  ```javascript
+  function(exports, module, require, __filename, __dirname){
+    // file Code
+  }
+  ```
+
+- All the variables defined in a node file are also not global since the are enclosed by a function. So they are local to that node function.
+- The wrapping function returns the `module.exports` property. It return this by default and we don't need to return this explicitly.
+- `exports` property is just an alias for module.exports property. So exports also points to the same object ie module.exports. So if we do `exports = [some value]` we are reassigning a new memory location to exports and it no longer points to module.exports.
+  ```javascript
+  exports = () => {}; // Not correct
+  module.exports = () => {}; // Correct
+  ```
+- The result of `require([filename])` is the module.exports property.
+
+<span id="globalobject"></span>
+
+### Gloal Object
+
+- `global` is the global object in node. It is similar to `window` object in browser.
+- Try by logging `console.dir(global,{depth:0})`.
+- So when we do `setTimeout()` we are actully doing `global.setTimeout()`.
+
+<span id="eventloop"></span>
+
+### Event Loop
+
+- Write `console.log("Ashish")` in a file and execute it using `node [filename]`. See that `Ashish` is printed in the console. At this time the node process has exited after executing this statement. There was no reason for node process to keep running in the background so it exited.
+- We can prevent the node process from exiting by a simple hack ie using setInterval. The reason why the process doesn't exit is because the nodes event loop is itself buisy now.
+  ```javascript
+  setInterval(console.log, 1000, "Ashish");
+  ```
+  Now if you try running the command `ps -ef | grep node` to list all the running node processes you will see a node process running.
+
+`Note : Every node process starts a event loop. But if there is no asynchronous operation to perform, the node process exits.`
+
+<span id="error"></span>
+
+### Errors and Exceptions
+
+| **Error**                                                                                                                                               | **Exception**                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| Errors are Problems                                                                                                                                     | Exceptions are Conditions                                 |
+| Errors should not be handled                                                                                                                            | Exceptions should be handled.                             |
+| In a way we can say unknown exceptions are problems. So the safest thing to do is to not handle it and let the process exit if it encounters a problem. | Whereas exceptions are known before had and are handeled. |
+
+<span id="cluster"></span>
+
+### Node Cluster
+
+- If we let the process exit if it encounters a problem then does that mean that our application will crash? Actully no because we run multiple node process for our application in production which is also known as node cluster.
+
+- A node cluster has 2 things
+  - A pool of node processes.
+  - A master process which monitors this pool. If some process goes down then this master process restarts that process.
+  - One node process takes 1 CPU core. So if we have 4 cores we can run 4 processes in the node cluster.
+  - You can build the node cluster using the inbuilt cluster module. You can also use PM2 tool which helps in creating and running node clusters.
+
+<span id="asyncpatterns"></span>
+
+### Async Patterns
+
+1. **Ediomatic Callback Pattern** :
+
+   - In any async pattern the callback is the last arugment of the async function.
+   - The callback always recieves an error object as the first argument. This is why it is know as **error first callback pattern**. If the is an error then this argument will be the error object otherwise it will be null.
+
+2. **Promise Pattern** :
+   - Using `utils.promisify([async func])` method we can get a promise from any async function.
+   - Some module give builting support for promises. Eg the fs module like `require('fs').promises`.
+
+<span id="eventemitter"></span>
+
+### Event Emitter
+
+- Streams are event emitters like `process.stdin` and `process.stdout`.
+- Events are the basis of node application. It works on the `pub sub` pattern.
+- `events` is the built in node module used for emitting events`.
+- Example
+
+  ```javascript
+  const EventEmitter = require("events");
+  var myEmitter = new EventEmitter();
+  myEmitter.on("Test_Emit", () => console.log("Emitted"));
+  myEmitter.emit("Test_Emit");
+  ```
 
 # Advanced
