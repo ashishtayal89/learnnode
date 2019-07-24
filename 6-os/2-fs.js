@@ -19,3 +19,13 @@
   rename(oldPath, newPath)
 
 */
+const fs = require("fs");
+const fsPromise = fs.promises;
+let readStream = fs.createReadStream("index.txt");
+readStream.on("data", stream => {
+  console.log(stream.toString());
+});
+fs.readFile("index.txt", (err, buffer) => {
+  console.log(buffer.toString());
+});
+fsPromise.readFile("index.txt").then(buffer => console.log(buffer.toString()));

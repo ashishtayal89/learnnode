@@ -26,16 +26,20 @@
    - [Event Loop](#eventloop)
    - [Error and Exception](#error)
    - [Node Cluster](#cluster)
-   - [Async Pattern](#asyncpattern)
+   - [Async Pattern](#asyncpatterns)
    - [Event Emitter](#eventemitter)
 5. [Web Server](#webserver)
    - [Intro](#serverintro)
-   - [Global Object](#globalobject)
-   - [Event Loop](#eventloop)
-   - [Error](#error)
-   - [Node Cluster](#cluster)
-   - [Async Patterns](#asyncpatterns)
-   - [Event Emitter](#eventemitter)
+   - [Monitoring](#monitoring)
+   - [Req and Res Obj](#reqandres)
+   - [Web Framework](#webframework)
+   - [Template Language](#templatelanguage)
+6. [Working with OS](#workingwithos)
+   - [Intro](#osintro)
+   - [OS Module](#osmodule)
+   - [FS Module](#fsmodule)
+   - [Child Process Module](#childprocessmodule)
+   - [Debugging Node](#debuggingnode)
 
 # Getting started
 
@@ -404,7 +408,7 @@ $ npx mocha
 
 2) **Promise Pattern** :
    - Using `utils.promisify([async func])` method we can get a promise from any async function.
-   - Some module give builting support for promises. Eg the fs module like `require('fs').promises`.
+   - Some module give builtin support for promises. Eg the fs module like `require('fs').promises`.
 
 <span id="eventemitter"></span>
 
@@ -469,6 +473,124 @@ server.listen(4242, () => {
 
 ### Monitoring
 
-- To
+- Node js as a runtime doesn't autoreload on any file update. To do that you need to monitor the save events of a file.
+- We do that using the `nodemon` package.
+- You can intall this package globally using `npm i -g nodemon`. Then run the node process using `nodemon` instead of `node`.
+
+<span id="reqandres"></span>
+
+### Request and Response Object
+
+```javascript
+const server = http.createServer();
+server.on("request", (req, res) => {
+  console.log(req);
+  res.end("Hello World\n");
+});
+```
+
+- You can log request object using `console.log(req)`. It will show all the request object properties. To avoid the nested properties log `console.dir(req, {depth:0})`.
+- Please note that the request object is of type `IncomingMessage`. This is the class which is used to instantiated the request object. This is important to know becouse if you need to know what you can do with the request object you need to look for this class inside the `http` module and read its documentation.
+
+  `NOTE : Please observe that the req object is logged twice instead of once. This is becasue for every incoming request my request handler is invoked twice and not once.`
+
+- If you log **req.url** instead of req then you will see that one request is for favicon.ico. So the browser is automatically trying to ask the server if it has the favicon.
+
+- If you log the response object using `console.dir(res, {depth:0})` you will observe that it is of type **ServerResponse**.
+- Both request and response objects are stream. The request object is a readable stream while response object is a writable stream. Since all stream are event emitters we can subscribe to events emitted by these objects too.
+
+<span id="#webframework"></span>
+
+### Web Framework
+
+- Node provides my low level built in modules like HTTP, HTTP2 and HTTPS. Although we can use these modules to build our application but there capabilities are limited. Eg the Http module doesn't have inbuild method to read the request body of post request. For this reason a lot of frameworks have come up and are widely used as well.
+- These framework generally wrap the inbuild node modules and give you out of the box functionality. There are very powerfull frameworks available like express.
+
+```javascript
+const express = require("express");
+
+const server = express();
+
+server.listen(4242, () => {
+  console.log("Express Server is running...");
+});
+```
+
+- **express** exports a function as its default export.You need to call that function to create a express server.
+- In express we don't define a single request listner, but multiple listners ie a listner per url. This is how it is different from built in http module.
+
+- Some alternative to express :
+  - [Koa](https://koajs.com/)
+  - [Sails](https://sailsjs.com/)
+  - [Meteor](https://www.meteor.com/)
+
+<span id="#templatelanguage"></span>
+
+### Template Language
+
+- Templating language is needed to generate some static html based on some data and deliver it to the client. If we don't use a templating language them we will have to do a lot of string concatination.
+- Most of these templating languages work with big frameworks like Koa and Express.
+- Some of the most popular templating languages are
+  - pug(earlier known as jade)
+  - handlebars(same language that the ember framework uses).
+  - ejs(Embedded Javascript)
+  - React + JSX
+- You need to inform the framework about the template language being used. For express you can do that using `server.set('view engine', 'ejs');`
+- Instead of using **server.send** we use **server.render** to render the index view.
+
+<span id="#workingwithos"></span>
+
+## Working with OS
+
+<span id="#osintro"></span>
+
+### Intro
+
+- There are some moduled which are designed to interact with the operating system.
+- Some of them are :
+  - os (General os operations)
+  - fs (Operations related to os file system)
+  - child_process (Enable us to run any os command from within node)
+
+<span id="#osmodule"></span>
+
+### OS Module
+
+- Provides operating system related utility method.
+- Refer to the 1-os file inside 6-os folder to refer to some os operations which can be performed.
+
+<span id="#fsmodule"></span>
+
+### FS Module
+
+- This is one of the most widely used built in module for node js. It is very powerfull and provides a lot of functionality.
+- You can read and write files not only as buffers but as steams.
+- | readFile(path[, options]) | createReadStream(path[, options]) |
+  | ------------------------- | --------------------------------- |
+  | Uses buffers              | Uses Streams                      |
+  | Uses more memory          | Uses less memory                  |
+- Refer to the 2-fs file inside 6-os folder to refer to some os operations which can be performed. Here we are refering to `require('fs').promises` to access all the methods which return promises.
+
+<span id="#childprocessmodule"></span>
+
+### Child Process Module
+
+- This modules starts another child process. This process once completed informs the node process about its completion.
+- There are 4 main child process which are as follow :
+  - exec : To execute any shell script command.
+  - execFile
+  - fork : To start another node process. This is used to create node cluster.
+  - spawn : This is the prefered way of executing the os commands. Preferred over exec and execfile
+
+<span id="#debuggingnode"></span>
+
+### Node Debug
+
+- Node debugger is integrated with chrome dev tools
+- Steps :
+  - Go to the terminal and write `node --inspect-brk [filename]`.
+  - Open chrome and in the url pane type `chorme://inspect`.
+  - Node process will be listed in the targets.
+  - Click on the process and the browser starts debugging the file for you.
 
 # Advanced
