@@ -22,6 +22,20 @@
    - [NPM Update](#npmupdate)
 4. [Module](#moduleintro)
    - [Module Intro](#moduleintro)
+   - [Global Object](#globalobject)
+   - [Event Loop](#eventloop)
+   - [Error and Exception](#error)
+   - [Node Cluster](#cluster)
+   - [Async Pattern](#asyncpattern)
+   - [Event Emitter](#eventemitter)
+5. [Web Server](#webserver)
+   - [Intro](#serverintro)
+   - [Global Object](#globalobject)
+   - [Event Loop](#eventloop)
+   - [Error](#error)
+   - [Node Cluster](#cluster)
+   - [Async Patterns](#asyncpatterns)
+   - [Event Emitter](#eventemitter)
 
 # Getting started
 
@@ -110,7 +124,7 @@ buzz.then(pickOrder);
 - REPL stands for Read, Eval, Print and Loop.
 - This instructs node to read a line, evaluate it, print the result and loop until the user exits the repl.
 
-`Note : Difference b/w a statement and an expression is that a statement would always return undefined. While the expression returns a value which generally is other than undefined.`
+  `Note : Difference b/w a statement and an expression is that a statement would always return undefined. While the expression returns a value which generally is other than undefined.`
 
 - **Node Editor** : Type `.editor` which will create a editor screen for you. Then type the code you want to run and press `Crtl + D` to finish or `Ctrl + C` to cancel. This piece of code will be evaluated and can be used going forward.
 
@@ -211,7 +225,7 @@ NPM stands for node package manager which help's in maintaining node packages. T
 
 - What happens if a dependent package is already installed in node_modules?
 
-  1. Node will see if the dependent package is installed at the root level of node_modules folder is the same as required.
+  1. Node will see if the dependent package installed at the root level of node_modules folder has the same version.
   2. If yes then it will ignore the package since it is already installed.
   3. If not then it will create a node_modules folder inside the root package which is dependent on the other package and intall it there.
 
@@ -378,8 +392,17 @@ $ npx mocha
 
    - In any async pattern the callback is the last arugment of the async function.
    - The callback always recieves an error object as the first argument. This is why it is know as **error first callback pattern**. If the is an error then this argument will be the error object otherwise it will be null.
+   - Example
+     ```javascript
+     server.listen(4242, err => {
+       console.log("Server is running...");
+     });
+     ```
+     - In this example the first argument is the port at which the server needs to start. This is an async operation.
+     - The second argument is the callback that is invoked on successful start of server or the Ediomatic callback.
+     - The first argument of this callback is an err object which is the error thrown in-case of any issue with the async operation. Also called as thee error first callback.
 
-2. **Promise Pattern** :
+2) **Promise Pattern** :
    - Using `utils.promisify([async func])` method we can get a promise from any async function.
    - Some module give builting support for promises. Eg the fs module like `require('fs').promises`.
 
@@ -398,5 +421,54 @@ $ npx mocha
   myEmitter.on("Test_Emit", () => console.log("Emitted"));
   myEmitter.emit("Test_Emit");
   ```
+
+<span id="webserver"></span>
+
+## Web Server
+
+<span id="serverintro"></span>
+
+### Introduction
+
+```javascript
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  res.end("Hello World\n");
+});
+
+server.listen(4242, () => {
+  console.log("Server is running...");
+});
+```
+
+- In the above example we have passed a callback as a handler to the request event. Every time a new request event occurs, this handler is invoked and req/res objects are passed as arguments to this handler.
+- The **server** object which is returned is an event emitter. One of the events this emits is **request**.
+- The above code can also be written as follows :
+
+  ```javascript
+  const http = require("http");
+
+  const server = http.createServer();
+  server.on("request", (req, res) => {
+    res.end("Hello World\n");
+  });
+
+  server.listen(4242, () => {
+    console.log("Server is running...");
+  });
+  ```
+
+- `res.end("Hello World\n");` is equal to `res.write("Hello World\n"); res.end();`
+
+- The **end** method is mandatory to end the http session. If not used the http session will think that the data is still being streamed.
+
+- `server.listen` method is used to start the server. The first argument passed is the os port at which the server needs to start and the second is the callback which is invoded after successful start of server.
+
+<span id="monitoring"></span>
+
+### Monitoring
+
+- To
 
 # Advanced
