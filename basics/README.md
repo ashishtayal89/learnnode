@@ -592,5 +592,3 @@ server.listen(4242, () => {
   - Open chrome and in the url pane type `chorme://inspect`.
   - Node process will be listed in the targets.
   - Click on the process and the browser starts debugging the file for you.
-
-# Advanced
