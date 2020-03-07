@@ -1,0 +1,4 @@
+- | grep init -> This stands for starts with "init"
+- | less -> Show only the top level configuration.
+- npm home lodash
+- npm repo lodash

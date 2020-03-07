@@ -499,7 +499,7 @@ server.on("request", (req, res) => {
 - If you log the response object using `console.dir(res, {depth:0})` you will observe that it is of type **ServerResponse**.
 - Both request and response objects are stream. The request object is a readable stream while response object is a writable stream. Since all stream are event emitters we can subscribe to events emitted by these objects too.
 
-<span id="#webframework"></span>
+<span id="webframework"></span>
 
 ### Web Framework
 
@@ -524,7 +524,7 @@ server.listen(4242, () => {
   - [Sails](https://sailsjs.com/)
   - [Meteor](https://www.meteor.com/)
 
-<span id="#templatelanguage"></span>
+<span id="templatelanguage"></span>
 
 ### Template Language
 
@@ -538,11 +538,11 @@ server.listen(4242, () => {
 - You need to inform the framework about the template language being used. For express you can do that using `server.set('view engine', 'ejs');`
 - Instead of using **server.send** we use **server.render** to render the index view.
 
-<span id="#workingwithos"></span>
+<span id="workingwithos"></span>
 
 ## Working with OS
 
-<span id="#osintro"></span>
+<span id="osintro"></span>
 
 ### Intro
 
@@ -559,7 +559,7 @@ server.listen(4242, () => {
 - Provides operating system related utility method.
 - Refer to the 1-os file inside 6-os folder to refer to some os operations which can be performed.
 
-<span id="#fsmodule"></span>
+<span id="fsmodule"></span>
 
 ### FS Module
 
@@ -571,7 +571,7 @@ server.listen(4242, () => {
   | Uses more memory          | Uses less memory                  |
 - Refer to the 2-fs file inside 6-os folder to refer to some os operations which can be performed. Here we are refering to `require('fs').promises` to access all the methods which return promises.
 
-<span id="#childprocessmodule"></span>
+<span id="childprocessmodule"></span>
 
 ### Child Process Module
 
@@ -582,7 +582,7 @@ server.listen(4242, () => {
   - fork : To start another node process. This is used to create node cluster.
   - spawn : This is the prefered way of executing the os commands. Preferred over exec and execfile
 
-<span id="#debuggingnode"></span>
+<span id="debuggingnode"></span>
 
 ### Node Debug
 
